@@ -49,7 +49,7 @@ class LottoViewController: UIViewController {
         let interval = endDate.timeIntervalSince(startDate)
         let days = Int(interval / 86400)
         count = Int((days/7) - 20)
-        
+        print(count)
     }
 
     func requestLotto(number: Int){
@@ -77,9 +77,11 @@ class LottoViewController: UIViewController {
                     print("drwtNo\(tag+1)")
                 }
                 
-                //회차 오류 대응
+                //회차 오류 대응 with 관규님
                 if json["returnValue"].stringValue == "fail" {
-                    self.requestLotto(number: self.count - 1)
+                    let newCount = self.count - 1
+                    self.count = newCount
+                    self.requestLotto(number: self.count)
                 }
                 
                 
